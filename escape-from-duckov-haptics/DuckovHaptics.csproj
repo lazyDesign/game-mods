@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>DuckovHaptics</RootNamespace>
+    <AssemblyName>DuckovHaptics</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <!--
+    Add references to Duckov game assemblies from:
+    Windows: <GamePath>\Duckov_Data\Managed\
+    macOS: <GamePath>/Duckov.app/Contents/Resources/Data/Managed/
+
+    Required assemblies:
+    - Duckov.Modding.dll
+    - UnityEngine.dll
+    - UnityEngine.CoreModule.dll
+    - UnityEngine.InputLegacyModule.dll (for Input class)
+
+    Example:
+    <ItemGroup>
+      <Reference Include="Duckov.Modding">
+        <HintPath>path/to/Duckov_Data/Managed/Duckov.Modding.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+    </ItemGroup>
+  -->
+
+</Project>

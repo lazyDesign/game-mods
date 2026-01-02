@@ -1,0 +1,23 @@
+{
+  "enabled": true,
+  "controllerIndex": 0,
+  "fireHaptics": {
+    "enabled": true,
+    "lowFrequencyIntensity": 0.6,
+    "highFrequencyIntensity": 0.8,
+    "durationMs": 80
+  },
+  "reloadHaptics": {
+    "enabled": true,
+    "lowFrequencyIntensity": 0.3,
+    "highFrequencyIntensity": 0.2,
+    "durationMs": 150
+  },
+  "damageHaptics": {
+    "enabled": true,
+    "lowFrequencyIntensity": 0.9,
+    "highFrequencyIntensity": 0.5,
+    "durationMs": 200
+  },
+  "fireKey": "Mouse0"
+}
