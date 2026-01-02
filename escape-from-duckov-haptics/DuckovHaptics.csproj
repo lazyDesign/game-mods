@@ -7,26 +7,40 @@
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>release/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
-  <!--
-    Add references to Duckov game assemblies from:
-    Windows: <GamePath>\Duckov_Data\Managed\
-    macOS: <GamePath>/Duckov.app/Contents/Resources/Data/Managed/
+  <PropertyGroup>
+    <!-- Update this path if your game is installed elsewhere -->
+    <DuckovManagedPath>$(HOME)/Library/Application Support/Steam/steamapps/common/Escape from Duckov/Duckov.app/Contents/Resources/Data/Managed</DuckovManagedPath>
+  </PropertyGroup>
 
-    Required assemblies:
-    - Duckov.Modding.dll
-    - UnityEngine.dll
-    - UnityEngine.CoreModule.dll
-    - UnityEngine.InputLegacyModule.dll (for Input class)
-
-    Example:
-    <ItemGroup>
-      <Reference Include="Duckov.Modding">
-        <HintPath>path/to/Duckov_Data/Managed/Duckov.Modding.dll</HintPath>
-        <Private>false</Private>
-      </Reference>
-    </ItemGroup>
-  -->
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(DuckovManagedPath)/Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TeamSoda.Duckov.Core">
+      <HintPath>$(DuckovManagedPath)/TeamSoda.Duckov.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(DuckovManagedPath)/UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(DuckovManagedPath)/UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(DuckovManagedPath)/UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>$(DuckovManagedPath)/UnityEngine.JSONSerializeModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
 
 </Project>

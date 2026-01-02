@@ -1,0 +1,7 @@
+# Build artifacts
+obj/
+bin/
+
+# Keep release folder but ignore deps
+release/*.deps.json
+release/*.pdb
