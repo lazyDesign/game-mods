@@ -1,0 +1,117 @@
+"workshopitem"
+{
+	"appid"		"3167020"
+	"contentfolder"		"/Users/george/Documents/game-mods/escape-from-duckov-haptics/release"
+	"previewfile"		"/Users/george/Documents/game-mods/escape-from-duckov-haptics/workshop/preview.png"
+	"visibility"		"0"
+	"title"		"Haptic Feedback - Controller Vibration"
+	"description"		"[h1]Haptic Feedback Mod v6.8[/h1]
+
+Feel every shot! Controller vibration/haptic feedback for Steam Deck and gamepads.
+
+[h2]Features[/h2]
+[list]
+[*] Weapon-specific vibration patterns (pistol, SMG, rifle, shotgun, sniper, melee, heavy)
+[*] In-game settings via ModConfig
+[*] Steam Deck optimized
+[*] Works with Xbox/XInput controllers
+[/list]
+
+[h2]Vibration Patterns[/h2]
+[list]
+[*] Pistol: Light, quick pulse
+[*] SMG: Rapid, moderate
+[*] Rifle: Medium punch
+[*] Shotgun: Heavy thump
+[*] Sniper: Maximum recoil feel
+[/list]
+
+[h2]Requirements[/h2]
+[list]
+[*] Steam Deck or XInput-compatible controller
+[*] Optional: ModConfig mod for in-game settings
+[/list]
+
+[h2]Configuration[/h2]
+If you have ModConfig installed, settings appear in the mod options menu.
+Press F9 in-game for debug window.
+
+[i]Perfect for Steam Deck gaming![/i]
+
+---
+
+[h1]震动反馈 Mod v6.8[/h1]
+
+感受每一枪！为Steam Deck和手柄提供震动/触觉反馈。
+
+[h2]功能[/h2]
+[list]
+[*] 武器专属震动模式（手枪、冲锋枪、步枪、霰弹枪、狙击枪、近战、重武器）
+[*] 通过ModConfig进行游戏内设置
+[*] Steam Deck优化
+[*] 支持Xbox/XInput手柄
+[/list]
+
+[h2]震动模式[/h2]
+[list]
+[*] 手枪：轻快短促
+[*] 冲锋枪：快速中等
+[*] 步枪：中等力度
+[*] 霰弹枪：重击感
+[*] 狙击枪：最大后坐力感
+[/list]
+
+[h2]要求[/h2]
+[list]
+[*] Steam Deck或XInput兼容手柄
+[*] 可选：ModConfig mod用于游戏内设置
+[/list]
+
+[h2]配置[/h2]
+如果安装了ModConfig，设置会出现在mod选项菜单中。
+按F9打开调试窗口。
+
+[i]Steam Deck游戏必备！[/i]
+
+---
+
+[h1]振動フィードバック Mod v6.8[/h1]
+
+すべての射撃を体感！Steam Deckとゲームパッド用の振動/触覚フィードバック。
+
+[h2]機能[/h2]
+[list]
+[*] 武器別振動パターン（ピストル、SMG、ライフル、ショットガン、スナイパー、近接、重火器）
+[*] ModConfigによるゲーム内設定
+[*] Steam Deck最適化
+[*] Xbox/XInputコントローラー対応
+[/list]
+
+[h2]振動パターン[/h2]
+[list]
+[*] ピストル：軽く素早いパルス
+[*] SMG：速く中程度
+[*] ライフル：中程度の衝撃
+[*] ショットガン：重い衝撃
+[*] スナイパー：最大の反動感
+[/list]
+
+[h2]必要条件[/h2]
+[list]
+[*] Steam DeckまたはXInput対応コントローラー
+[*] オプション：ゲーム内設定用ModConfig mod
+[/list]
+
+[h2]設定[/h2]
+ModConfigがインストールされている場合、modオプションメニューに設定が表示されます。
+F9でデバッグウィンドウを開きます。
+
+[i]Steam Deckゲーミングに最適！[/i]"
+	"changenote"		"v6.8: Fixed zombie bug caused by Health.OnDead event subscription"
+	"tags"
+	{
+		"0"		"Gameplay"
+		"1"		"Quality of Life"
+	}
+	"publishedfileid"		"3637049322"
+}
