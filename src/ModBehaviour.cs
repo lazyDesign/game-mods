@@ -37,6 +37,7 @@ namespace DuckovHaptics
         private Delegate _deathEventHandler;
         private Delegate _weaponSwitchHandler;
         private Delegate _enemyDeadHandler;
+        private Delegate _killMarkerHandler;
 
         // Debug window
         private bool _showDebugWindow = false;
@@ -56,7 +57,7 @@ namespace DuckovHaptics
         void Awake()
         {
             Debug.Log("[DuckovHaptics] ====================================");
-            Debug.Log("[DuckovHaptics] Haptic Feedback Mod v6.8 Loaded! Press F9 for debug window");
+            Debug.Log("[DuckovHaptics] Haptic Feedback Mod v6.9 Loaded! Press F9 for debug window");
             Debug.Log("[DuckovHaptics] ====================================");
             LogAllInputDevices();
             InitializeModConfig();
@@ -282,7 +283,8 @@ namespace DuckovHaptics
             // Subscribe to InputManager.OnSwitchWeaponInput
             SubscribeToStaticEvent("InputManager", "OnSwitchWeaponInput", "OnWeaponSwitch");
 
-            // NOTE: Removed Health.OnDead subscription - it was causing enemies to delay dying ("zombie bug")
+            // Subscribe to OnKillMarker for kill/headshot vibration (instead of Health.OnDead which caused zombie bug)
+            SubscribeToKillMarkerEvent();
         }
 
         private void SubscribeToStaticEvent(string typeName, string eventName, string handlerName)
@@ -396,6 +398,136 @@ namespace DuckovHaptics
             catch (Exception ex)
             {
                 Debug.LogWarning($"[DuckovHaptics] Failed to subscribe to character events: {ex.Message}");
+            }
+        }
+
+        private void SubscribeToKillMarkerEvent()
+        {
+            // Subscribe to OnKillMarker event from GameEventDispatcher or similar
+            // This event fires when player gets a kill, with path indicating normal or crit
+            try
+            {
+                // Search for class containing OnKillMarker
+                Type eventType = null;
+                EventInfo killMarkerEvent = null;
+
+                foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    foreach (var type in asm.GetTypes())
+                    {
+                        try
+                        {
+                            var evt = type.GetEvent("OnKillMarker", BindingFlags.Public | BindingFlags.Static);
+                            if (evt != null)
+                            {
+                                eventType = type;
+                                killMarkerEvent = evt;
+                                Debug.Log($"[DuckovHaptics] Found OnKillMarker in {type.FullName}");
+                                break;
+                            }
+                        }
+                        catch { /* Skip types that can't be reflected */ }
+                    }
+                    if (killMarkerEvent != null) break;
+                }
+
+                if (killMarkerEvent == null)
+                {
+                    Debug.LogWarning("[DuckovHaptics] OnKillMarker event not found in any assembly");
+                    return;
+                }
+
+                // Create handler for the kill marker event
+                var handler = CreateKillMarkerDelegate(killMarkerEvent.EventHandlerType);
+                if (handler != null)
+                {
+                    killMarkerEvent.AddEventHandler(null, handler);
+                    _killMarkerHandler = handler;
+                    Debug.Log($"[DuckovHaptics] Subscribed to {eventType.Name}.OnKillMarker for kill detection");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"[DuckovHaptics] Failed to subscribe to OnKillMarker: {ex.Message}");
+            }
+        }
+
+        private Delegate CreateKillMarkerDelegate(Type delegateType)
+        {
+            try
+            {
+                var invokeMethod = delegateType.GetMethod("Invoke");
+                var parameters = invokeMethod?.GetParameters();
+
+                if (parameters == null || parameters.Length == 0)
+                {
+                    // No params - just vibrate for normal kill
+                    Action action = () => OnKillMarkerNoParams();
+                    return Delegate.CreateDelegate(delegateType, action.Target, action.Method);
+                }
+                else if (parameters.Length == 1)
+                {
+                    // One param - likely the path string
+                    return Delegate.CreateDelegate(delegateType, this,
+                        GetType().GetMethod("OnKillMarkerOneParam", BindingFlags.Instance | BindingFlags.NonPublic));
+                }
+                else if (parameters.Length == 2)
+                {
+                    // Two params
+                    return Delegate.CreateDelegate(delegateType, this,
+                        GetType().GetMethod("OnKillMarkerTwoParams", BindingFlags.Instance | BindingFlags.NonPublic));
+                }
+
+                Debug.LogWarning($"[DuckovHaptics] Unexpected OnKillMarker param count: {parameters.Length}");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"[DuckovHaptics] CreateKillMarkerDelegate failed: {ex.Message}");
+                return null;
+            }
+        }
+
+        private void OnKillMarkerNoParams()
+        {
+            Debug.Log("[DuckovHaptics] >>> KILL MARKER (no params) <<<");
+            VibrateForKill(false);
+        }
+
+        private void OnKillMarkerOneParam(object param)
+        {
+            string paramStr = param?.ToString() ?? "";
+            Debug.Log($"[DuckovHaptics] >>> KILL MARKER: {paramStr} <<<");
+
+            // Check if it's a crit/headshot based on path name
+            bool isHeadshot = paramStr.ToLower().Contains("crit");
+            VibrateForKill(isHeadshot);
+        }
+
+        private void OnKillMarkerTwoParams(object param1, object param2)
+        {
+            string p1 = param1?.ToString() ?? "";
+            string p2 = param2?.ToString() ?? "";
+            Debug.Log($"[DuckovHaptics] >>> KILL MARKER: {p1}, {p2} <<<");
+
+            // Check either param for crit indicator
+            bool isHeadshot = p1.ToLower().Contains("crit") || p2.ToLower().Contains("crit");
+            VibrateForKill(isHeadshot);
+        }
+
+        private void VibrateForKill(bool isHeadshot)
+        {
+            if (isHeadshot)
+            {
+                Debug.Log("[DuckovHaptics] >>> HEADSHOT KILL! <<<");
+                // Strong double-pulse for headshot: high intensity, longer duration
+                Vibrate(_headshotIntensity * 0.8f, _headshotIntensity, 180);
+            }
+            else
+            {
+                Debug.Log("[DuckovHaptics] >>> KILL! <<<");
+                // Normal kill: medium-high intensity, shorter duration
+                Vibrate(_killIntensity * 0.5f, _killIntensity * 0.7f, 120);
             }
         }
 
