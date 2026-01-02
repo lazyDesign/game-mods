@@ -1,11 +1,11 @@
 "workshopitem"
 {
-    "appid"             "3167020"
-    "contentfolder"     "../release"
-    "previewfile"       "preview.png"
-    "visibility"        "0"
-    "title"             "Haptic Feedback - Controller Vibration"
-    "description"       "[h1]Haptic Feedback Mod[/h1]
+	"appid"		"3167020"
+	"contentfolder"		"/Users/george/Documents/game-mods/escape-from-duckov-haptics/release"
+	"previewfile"		"/Users/george/Documents/game-mods/escape-from-duckov-haptics/workshop/preview.png"
+	"visibility"		"0"
+	"title"		"Haptic Feedback - Controller Vibration"
+	"description"		"[h1]Haptic Feedback Mod[/h1]
 
 Feel the recoil! This mod adds controller vibration/haptic feedback when firing weapons.
 
@@ -36,10 +36,11 @@ Adjust vibration intensity (0.0-1.0) and duration (ms) to your preference.
 [/list]
 
 [i]Works great with Steam Input gamepad-to-keyboard mapping![/i]"
-    "changenote"        "Initial release - fire haptics with configurable intensity"
-    "tags"
-    {
-        "0"     "Gameplay"
-        "1"     "Quality of Life"
-    }
+	"changenote"		"Initial release - fire haptics with configurable intensity"
+	"tags"
+	{
+		"0"		"Gameplay"
+		"1"		"Quality of Life"
+	}
+	"publishedfileid"		"3637049322"
 }
