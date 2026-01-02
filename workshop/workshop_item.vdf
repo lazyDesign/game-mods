@@ -5,7 +5,7 @@
 	"previewfile"		"/Users/george/Documents/game-mods/escape-from-duckov-haptics/workshop/preview.png"
 	"visibility"		"0"
 	"title"		"Haptic Feedback - Controller Vibration"
-	"description"		"[h1]Haptic Feedback Mod v6.8[/h1]
+	"description"		"[h1]Haptic Feedback Mod v6.9[/h1]
 
 Feel every shot! Controller vibration/haptic feedback for Steam Deck and gamepads.
 
@@ -40,7 +40,7 @@ Press F9 in-game for debug window.
 
 ---
 
-[h1]震动反馈 Mod v6.8[/h1]
+[h1]震动反馈 Mod v6.9[/h1]
 
 感受每一枪！为Steam Deck和手柄提供震动/触觉反馈。
 
@@ -75,7 +75,7 @@ Press F9 in-game for debug window.
 
 ---
 
-[h1]振動フィードバック Mod v6.8[/h1]
+[h1]振動フィードバック Mod v6.9[/h1]
 
 すべての射撃を体感！Steam Deckとゲームパッド用の振動/触覚フィードバック。
 
@@ -107,7 +107,7 @@ ModConfigがインストールされている場合、modオプションメニ�
 F9でデバッグウィンドウを開きます。
 
 [i]Steam Deckゲーミングに最適！[/i]"
-	"changenote"		"v6.8: Fixed zombie bug caused by Health.OnDead event subscription"
+	"changenote"		"v6.9: Added kill and headshot vibration feedback via OnKillMarker"
 	"tags"
 	{
 		"0"		"Gameplay"
